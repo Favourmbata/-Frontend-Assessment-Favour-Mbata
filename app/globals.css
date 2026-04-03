@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+/* Smooth scroll handled via data attribute on <html> in layout.tsx */
+
+/* Prevent layout shift from scrollbar appearing */
+html {
+  overflow-y: scroll;
+}

@@ -1,4 +1,4 @@
-// Maps Pokémon type names to Tailwind CSS classes
+
 export const TYPE_COLORS: Record<string, string> = {
   normal:   "bg-gray-400 text-white",
   fire:     "bg-orange-500 text-white",

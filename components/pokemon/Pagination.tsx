@@ -24,7 +24,7 @@ export function Pagination({ currentPage, totalPages }: PaginationProps) {
 
   if (totalPages <= 1) return null;
 
-  // Build page window: always show first, last, current ±2
+  
   const pages = buildPageWindow(currentPage, totalPages);
 
   return (

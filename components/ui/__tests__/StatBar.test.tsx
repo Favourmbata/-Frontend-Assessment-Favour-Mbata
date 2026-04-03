@@ -28,14 +28,14 @@ describe("StatBar", () => {
 
   it("applies green color for high stats (>=70%)", () => {
     const { container } = render(<StatBar name="speed" value={180} max={255} />);
-    // 180/255 = ~70.6% → green
+   
     const fill = container.querySelector(".bg-green-500");
     expect(fill).toBeTruthy();
   });
 
   it("applies red color for low stats (<40%)", () => {
     const { container } = render(<StatBar name="defense" value={50} max={255} />);
-    // 50/255 = ~19.6% → red
+    
     const fill = container.querySelector(".bg-red-400");
     expect(fill).toBeTruthy();
   });

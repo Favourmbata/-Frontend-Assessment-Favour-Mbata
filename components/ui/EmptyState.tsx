@@ -15,7 +15,7 @@ export function EmptyState({
       aria-live="polite"
       className="flex flex-col items-center justify-center py-24 text-center"
     >
-      {/* Pokéball icon — pure CSS, no external image */}
+     
       <div className="w-20 h-20 mb-6 relative" aria-hidden="true">
         <div className="w-full h-full rounded-full border-4 border-gray-300 overflow-hidden">
           <div className="w-full h-1/2 bg-red-400" />

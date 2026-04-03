@@ -16,7 +16,7 @@ export function SearchBar() {
   const [search, setSearch] = useState(searchParams.get("q") ?? "");
   const [type, setType] = useState(searchParams.get("type") ?? "");
 
-  // 300ms debounce before pushing to URL (F-3 requirement)
+  
   const debouncedSearch = useDebounce(search, 300);
 
   const buildUrl = useCallback(
@@ -31,7 +31,6 @@ export function SearchBar() {
     [pathname]
   );
 
-  // Push URL when debounced search changes
   useEffect(() => {
     startTransition(() => {
       router.push(buildUrl(debouncedSearch, type), { scroll: false });
@@ -40,7 +39,7 @@ export function SearchBar() {
 
   return (
     <div className="flex flex-col sm:flex-row gap-3">
-      {/* Search input */}
+     
       <div className="relative flex-1">
         <label htmlFor="pokemon-search" className="sr-only">
           Search Pokémon by name
@@ -76,7 +75,7 @@ export function SearchBar() {
         )}
       </div>
 
-      {/* Type filter */}
+     
       <div className="relative">
         <label htmlFor="type-filter" className="sr-only">
           Filter by type

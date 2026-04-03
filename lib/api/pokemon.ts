@@ -8,12 +8,11 @@ import type {
 const BASE_URL = "https://pokeapi.co/api/v2";
 const PAGE_SIZE = 24;
 
-// Sprite URL is deterministic from ID — no extra fetch needed
+
 export function getSpriteUrl(id: number): string {
   return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
 }
 
-// ISR: revalidate every 24h — Pokémon list is stable
 export async function fetchPokemonList(
   page: number = 1
 ): Promise<{ cards: PokemonCard[]; total: number; totalPages: number }> {
@@ -28,9 +27,7 @@ export async function fetchPokemonList(
 
   const list: PokemonListResponse = await res.json();
 
-  // Build cards from list only — no per-pokemon fetch needed for listing
-  // We derive id from URL, image from deterministic sprite URL
-  // height/weight/types require individual fetches; we batch them
+ 
   const cards = await Promise.all(
     list.results.map(async (item) => {
       const id = extractIdFromUrl(item.url);
@@ -45,7 +42,7 @@ export async function fetchPokemonList(
   };
 }
 
-// Fetch a lightweight card — used for listing
+
 export async function fetchPokemonCard(id: number): Promise<PokemonCard> {
   const res = await fetch(`${BASE_URL}/pokemon/${id}`, {
     next: { revalidate: 86400 },
@@ -55,7 +52,7 @@ export async function fetchPokemonCard(id: number): Promise<PokemonCard> {
   return toPokemonCard(p);
 }
 
-// Full detail fetch — used for detail page only
+
 export async function fetchPokemonById(id: number | string): Promise<Pokemon> {
   const res = await fetch(`${BASE_URL}/pokemon/${id}`, {
     next: { revalidate: 86400 },
@@ -64,7 +61,7 @@ export async function fetchPokemonById(id: number | string): Promise<Pokemon> {
   return res.json();
 }
 
-// Species data — streamed separately on detail page
+
 export async function fetchPokemonSpecies(
   id: number | string
 ): Promise<PokemonSpecies> {
@@ -75,7 +72,7 @@ export async function fetchPokemonSpecies(
   return res.json();
 }
 
-// All names for client-side search — single request, cached 24h
+
 export async function fetchAllPokemonNames(): Promise<
   Array<{ name: string; id: number }>
 > {
@@ -90,7 +87,7 @@ export async function fetchAllPokemonNames(): Promise<
   }));
 }
 
-// Type filter — fetches type endpoint then individual cards
+
 export async function fetchPokemonByType(
   type: string,
   page: number = 1
@@ -101,7 +98,7 @@ export async function fetchPokemonByType(
   if (!res.ok) throw new Error(`Type not found: ${type}`);
 
   const data = await res.json();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+ 
   const allPokemon: Array<{ pokemon: { name: string; url: string } }> =
     data.pokemon;
 
@@ -120,7 +117,7 @@ export async function fetchPokemonByType(
   return { cards, total, totalPages };
 }
 
-// --- helpers ---
+
 
 export function extractIdFromUrl(url: string): number {
   const parts = url.replace(/\/$/, "").split("/");

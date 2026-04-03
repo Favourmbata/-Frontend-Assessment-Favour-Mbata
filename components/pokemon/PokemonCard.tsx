@@ -21,7 +21,7 @@ export function PokemonCard({ pokemon, priority = false }: PokemonCardProps) {
                  focus-visible:outline-indigo-500 focus-visible:outline-offset-2"
       aria-label={`View details for ${formatName(pokemon.name)}`}
     >
-      {/* Image area */}
+     
       <div className={`relative h-48 bg-gradient-to-br ${gradient} flex items-center justify-center`}>
         <span className="absolute top-3 left-3 text-xs font-bold text-gray-400">
           {formatId(pokemon.id)}
@@ -36,7 +36,7 @@ export function PokemonCard({ pokemon, priority = false }: PokemonCardProps) {
             priority={priority}
           />
         ) : (
-          // Graceful fallback — Pokéball SVG
+          
           <div className="w-24 h-24 opacity-20" aria-hidden="true">
             <div className="w-full h-full rounded-full border-8 border-gray-400 overflow-hidden relative">
               <div className="w-full h-1/2 bg-red-400" />
@@ -49,7 +49,7 @@ export function PokemonCard({ pokemon, priority = false }: PokemonCardProps) {
         )}
       </div>
 
-      {/* Card body */}
+      
       <div className="p-4">
         <h2 className="text-lg font-bold text-gray-800 mb-2 capitalize">
           {formatName(pokemon.name)}

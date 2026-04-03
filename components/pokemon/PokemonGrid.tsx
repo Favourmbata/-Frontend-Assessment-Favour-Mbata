@@ -44,7 +44,7 @@ export function PokemonGrid({
 
   return (
     <div className="space-y-8">
-      {/* Result count */}
+      
       <p className="text-sm text-gray-500">
         {totalCount.toLocaleString()} Pokémon
         {searchQuery ? ` matching "${searchQuery}"` : ""}
